@@ -23,7 +23,7 @@ Resolver todos os desafios do site Capture the Ether, aprendendo sobre vulnerabi
 |---|---------|--------|--------|-------|
 | 1 | [Deploy a contract](./challenges/00_warmup_deploy_contract/) | 50 | ✅ Completo | `00_warmup_deploy_contract` |
 | 2 | [Call me](./challenges/01_warmup_call_me/) | 100 | ✅ Completo | `01_warmup_call_me` |
-| 3 | Choose a nickname | 200 | ⏳ Pendente | - |
+| 3 | [Choose a nickname](./challenges/02_warmup_choose_nickname/) | 200 | ✅ Completo | `02_warmup_choose_nickname` |
 
 ### Lotteries
 | # | Desafio | Pontos | Status | Pasta |
