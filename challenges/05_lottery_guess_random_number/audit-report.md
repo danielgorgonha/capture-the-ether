@@ -534,8 +534,14 @@ npx hardhat test challenges/05_lottery_guess_random_number/test/GuessTheRandomNu
 - `scripts/exploit.js`: Script para calcular o número usando dados de blocos e explorar a vulnerabilidade
 
 ### **Testes Hardhat**
-- `test/GuessTheRandomNumberChallenge.test.js`: Testes unitários do contrato incluindo cálculo do número
-- **Executar testes**: `npx hardhat test challenges/05_lottery_guess_random_number/test/GuessTheRandomNumberChallenge.test.js`
+- `test/GuessTheRandomNumberChallenge.test.js`: Testes unitários do contrato vulnerável incluindo cálculo do número
+- `test/GuessTheRandomNumberChallengeFixed.test.js`: Testes unitários do contrato corrigido
+- **Executar testes vulnerável**: `npx hardhat test challenges/05_lottery_guess_random_number/test/GuessTheRandomNumberChallenge.test.js`
+- **Executar testes corrigido**: `npx hardhat test challenges/05_lottery_guess_random_number/test/GuessTheRandomNumberChallengeFixed.test.js`
+
+### **Contratos Corrigidos**
+- `fixes/GuessTheRandomNumberChallengeFixed.sol`: Versão corrigida usando commit-reveal
+- `fixes/README.md`: Documentação das correções aplicadas
 
 ### **Referências**
 - [Capture the Ether - Guess the random number](https://capturetheether.com/challenges/lotteries/guess-the-random-number/)
