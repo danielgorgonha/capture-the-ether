@@ -28,7 +28,7 @@ Resolver todos os desafios do site Capture the Ether, aprendendo sobre vulnerabi
 ### Lotteries
 | # | Desafio | Pontos | Status | Pasta |
 |---|---------|--------|--------|-------|
-| 4 | Guess the number | 200 | ⏳ Pendente | - |
+| 4 | [Guess the number](./challenges/03_lottery_guess_number/) | 200 | ✅ Completo | `03_lottery_guess_number` |
 | 5 | Guess the secret number | 300 | ⏳ Pendente | - |
 | 6 | Guess the random number | 300 | ⏳ Pendente | - |
 | 7 | Guess the new number | 400 | ⏳ Pendente | - |
