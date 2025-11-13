@@ -2,7 +2,7 @@
 
 ## 📋 Resumo
 
-Este desafio requer que você defina um nickname no contrato `CaptureTheEther` que está deployado na rede Ropsten. O contrato mantém um mapeamento de nicknames por endereço, e você precisa chamar a função `setNickname()` com um valor não vazio (bytes32).
+Este desafio requer que você defina um nickname no contrato `CaptureTheEther`. O contrato mantém um mapeamento de nicknames por endereço, e você precisa chamar a função `setNickname()` com um valor não vazio (bytes32).
 
 ## 🔍 Análise dos Contratos
 
@@ -23,7 +23,6 @@ contract CaptureTheEther {
 **Características:**
 - Mantém um mapeamento de endereços para nicknames (bytes32)
 - Função pública `setNickname()` que permite qualquer endereço definir seu próprio nickname
-- Na rede Ropsten real, este contrato está em: `0x71c46Ed333C35e4E6c62D32dc7C8F00D125b4fee`
 
 ### NicknameChallenge (Contrato de Verificação)
 
@@ -92,18 +91,6 @@ O script mostrará:
 - Transaction hash da chamada `setNickname()`
 - Estado após: `nickname = "Hacker"`, `isComplete = true`
 
-### 4. Verificar no site Capture the Ether
-
-**Importante:** No site real, o contrato `CaptureTheEther` está deployado na rede Ropsten no endereço:
-```
-0x71c46Ed333C35e4E6c62D32dc7C8F00D125b4fee
-```
-
-Para verificar no site:
-1. Conecte sua MetaMask à rede Ropsten (ou simule localmente com chainId 3)
-2. Chame `setNickname()` no contrato `CaptureTheEther` com seu nickname
-3. No site Capture the Ether, clique em "Check Solution"
-
 ## 📊 Resultado Esperado
 
 ```
@@ -135,6 +122,7 @@ Para verificar no site:
   - Desafio completo: true
 
 🎉 Desafio completado! O nickname foi definido com sucesso
+💡 Use o endereço do CaptureTheEther no site Capture the Ether para verificar
 ```
 
 ## 🔗 Referências
