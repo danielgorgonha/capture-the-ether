@@ -1,0 +1,30 @@
+{
+  "name": "capture-the-ether",
+  "version": "0.1.0",
+  "description": "Soluções para os desafios do Capture the Ether",
+  "main": "index.js",
+  "scripts": {
+    "node": "hardhat node --hostname 127.0.0.1 --port 8545",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run",
+    "exploit": "hardhat run"
+  },
+  "keywords": [
+    "ethereum",
+    "solidity",
+    "security",
+    "capture-the-ether",
+    "smart-contracts"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0"
+  },
+  "dependencies": {
+    "ethers": "^6.9.0"
+  }
+}
+
