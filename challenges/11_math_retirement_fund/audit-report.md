@@ -530,3 +530,15 @@ npx hardhat test challenges/11_math_retirement_fund/test/RetirementFundChallenge
 - [Integer Underflow in Solidity](https://consensys.github.io/smart-contract-best-practices/attacks/integer-overflow/)
 - [selfdestruct in Solidity](https://docs.soliditylang.org/en/v0.4.21/introduction-to-smart-contracts.html#deactivate-and-self-destruct)
 
+---
+
+## 📝 **Notas Finais**
+
+Este relatório demonstra o processo completo de auditoria aplicado a um contrato vulnerável que combina integer underflow com a capacidade de `selfdestruct` forçar ether em contratos. A vulnerabilidade identificada (não validar que cálculos não podem resultar em underflow) demonstra a importância de validar assunções e considerar que contratos podem receber ether via `selfdestruct` mesmo sem função `payable`.
+
+**Próximos Passos**: Avançar para desafios de storage collision, onde arrays dinâmicos podem ser explorados para sobrescrever variáveis de estado.
+
+---
+
+*Relatório gerado seguindo as melhores práticas de auditoria de smart contracts e o estilo didático do professor.*
+

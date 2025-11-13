@@ -543,3 +543,15 @@ npx hardhat test challenges/13_math_donation/test/DonationChallengeFixed.test.js
 - [Storage Layout in Solidity](https://docs.soliditylang.org/en/v0.4.21/miscellaneous.html#layout-of-state-variables-in-storage)
 - [Mappings vs Arrays](https://docs.soliditylang.org/en/latest/types.html#mappings)
 
+---
+
+## 📝 **Notas Finais**
+
+Este relatório demonstra o processo completo de auditoria aplicado a um contrato vulnerável com storage collision em arrays de structs que compromete controle de acesso. A vulnerabilidade identificada (arrays de structs podem fazer wrap-around para sobrescrever variáveis críticas como `owner`) demonstra a importância de proteger variáveis de controle de acesso e usar mappings em vez de arrays quando apropriado.
+
+**Próximos Passos**: Avançar para o desafio final de matemática, onde múltiplas vulnerabilidades são combinadas para criar um exploit mais poderoso.
+
+---
+
+*Relatório gerado seguindo as melhores práticas de auditoria de smart contracts e o estilo didático do professor.*
+

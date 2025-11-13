@@ -481,3 +481,15 @@ npx hardhat test challenges/07_lottery_predict_future/test/PredictTheFutureChall
 - [Ethers.js Documentation](https://docs.ethers.org/)
 - [Solidity 0.4.21 Documentation](https://docs.soliditylang.org/en/v0.4.21/)
 
+---
+
+## 📝 **Notas Finais**
+
+Este relatório demonstra o processo completo de auditoria aplicado a um contrato vulnerável com aleatoriedade previsível. A vulnerabilidade identificada (uso de dados públicos de blocos para aleatoriedade) é um erro comum em contratos de loteria que pode ser facilmente evitado com esquemas seguros como commit-reveal ou Chainlink VRF.
+
+**Próximos Passos**: Avançar para desafios mais complexos, onde múltiplas vulnerabilidades são combinadas ou onde técnicas mais sofisticadas são necessárias para exploração.
+
+---
+
+*Relatório gerado seguindo as melhores práticas de auditoria de smart contracts e o estilo didático do professor.*
+

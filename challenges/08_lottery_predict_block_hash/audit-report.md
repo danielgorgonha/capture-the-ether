@@ -434,3 +434,15 @@ npx hardhat test challenges/08_lottery_predict_block_hash/test/PredictTheBlockHa
 - [Solidity 0.4.21 Documentation](https://docs.soliditylang.org/en/v0.4.21/)
 - [EVM Opcodes - BLOCKHASH](https://ethereum.org/en/developers/docs/evm/opcodes/)
 
+---
+
+## 📝 **Notas Finais**
+
+Este relatório demonstra o processo completo de auditoria aplicado a um contrato vulnerável que explora limitações conhecidas do EVM. A vulnerabilidade identificada (limitação do `block.blockhash()` a 256 blocos) demonstra a importância de conhecer e considerar as limitações do ambiente de execução ao projetar contratos.
+
+**Próximos Passos**: Avançar para desafios de matemática, onde vulnerabilidades aritméticas como integer overflow e storage collision são exploradas.
+
+---
+
+*Relatório gerado seguindo as melhores práticas de auditoria de smart contracts e o estilo didático do professor.*
+

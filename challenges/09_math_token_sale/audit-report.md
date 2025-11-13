@@ -479,3 +479,15 @@ npx hardhat test challenges/09_math_token_sale/test/TokenSaleChallengeFixed.test
 - [Integer Overflow in Solidity](https://consensys.github.io/smart-contract-best-practices/attacks/integer-overflow/)
 - [SafeMath Library](https://docs.openzeppelin.com/contracts/2.x/api/math#SafeMath)
 
+---
+
+## 📝 **Notas Finais**
+
+Este relatório demonstra o processo completo de auditoria aplicado a um contrato vulnerável com integer overflow. A vulnerabilidade identificada (falta de proteção contra overflow em operações aritméticas) é um erro crítico em versões antigas do Solidity que pode ser facilmente evitado usando SafeMath ou atualizando para Solidity 0.8.0+.
+
+**Próximos Passos**: Avançar para desafios mais complexos de matemática, onde integer underflow e outras vulnerabilidades aritméticas são exploradas em conjunto.
+
+---
+
+*Relatório gerado seguindo as melhores práticas de auditoria de smart contracts e o estilo didático do professor.*
+

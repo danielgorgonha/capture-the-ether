@@ -495,3 +495,15 @@ npx hardhat test challenges/10_math_token_whale/test/TokenWhaleChallengeFixed.te
 - [Integer Underflow in Solidity](https://consensys.github.io/smart-contract-best-practices/attacks/integer-overflow/)
 - [ERC20 Token Standard](https://eips.ethereum.org/EIPS/eip-20)
 
+---
+
+## 📝 **Notas Finais**
+
+Este relatório demonstra o processo completo de auditoria aplicado a um contrato ERC20 vulnerável com uso incorreto de `msg.sender` e integer underflow. A vulnerabilidade identificada (uso de `msg.sender` em funções internas quando o contexto pode variar) demonstra a importância de usar parâmetros explícitos em vez de depender de variáveis globais.
+
+**Próximos Passos**: Avançar para desafios mais complexos, onde múltiplas vulnerabilidades são combinadas para criar exploits sofisticados.
+
+---
+
+*Relatório gerado seguindo as melhores práticas de auditoria de smart contracts e o estilo didático do professor.*
+

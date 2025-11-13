@@ -573,3 +573,15 @@ npx hardhat test challenges/14_math_fifty_years/test/FiftyYearsChallengeFixed.te
 - [Storage Layout in Solidity](https://docs.soliditylang.org/en/v0.4.21/miscellaneous.html#layout-of-state-variables-in-storage)
 - [Integer Overflow in Solidity](https://swcregistry.io/docs/SWC-101)
 
+---
+
+## 📝 **Notas Finais**
+
+Este relatório demonstra o processo completo de auditoria aplicado a um contrato vulnerável que combina múltiplas vulnerabilidades (storage collision, integer overflow, e variável não inicializada) para criar um exploit sofisticado. Este desafio conclui a série de desafios de matemática, demonstrando como vulnerabilidades complexas podem ser exploradas em conjunto e a importância de prevenir todas as vulnerabilidades, não apenas algumas.
+
+**Próximos Passos**: Este foi o último desafio implementado. Os relatórios de auditoria cobrem todos os desafios do Capture the Ether implementados neste repositório, demonstrando uma análise completa e sistemática de vulnerabilidades em smart contracts.
+
+---
+
+*Relatório gerado seguindo as melhores práticas de auditoria de smart contracts e o estilo didático do professor.*
+
