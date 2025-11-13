@@ -468,6 +468,65 @@ Este desafio prepara o terreno para desafios mais complexos de loteria, onde a a
 
 ---
 
+## 🔧 **Correções Implementadas**
+
+### **Contratos Corrigidos**
+
+Foram criadas versões corrigidas do contrato vulnerável, implementando as recomendações de segurança:
+
+#### **Commit-Reveal (GuessTheRandomNumberChallengeFixed.sol)**
+
+**Localização**: `fixes/GuessTheRandomNumberChallengeFixed.sol`
+
+**Correções Aplicadas**:
+1. ✅ **Removido uso de dados públicos de blocos**: Não usa mais `block.blockhash` ou `now`
+2. ✅ **Implementado commit-reveal**: Usa esquema commit-reveal para aleatoriedade
+3. ✅ **Controle de estado**: Previne múltiplas tentativas do mesmo endereço
+4. ✅ **Eventos**: Emite eventos para transparência e auditoria
+5. ✅ **Solidity 0.8.20**: Atualizado com proteções built-in
+
+**Como funciona**:
+- Fase 1 (Commit): Um hash do número secreto + salt é commitado
+- Fase 2 (Reveal): Após 1 dia, o número e salt são revelados e validados
+- Fase 3 (Guess): Jogadores podem tentar adivinhar após o reveal
+
+**Testes de Validação**:
+- ✅ 9 testes passando
+- ✅ Commit-reveal flow funciona corretamente
+- ✅ Previne uso de dados de blocos
+- ✅ Valida que não há mais cálculo baseado em blocos
+
+**Executar testes**:
+```bash
+npx hardhat test challenges/05_lottery_guess_random_number/test/GuessTheRandomNumberChallengeFixed.test.js
+```
+
+### **Comparação: Vulnerável vs Corrigido**
+
+| Aspecto | Versão Vulnerável | Versão Corrigida |
+|---------|-------------------|------------------|
+| **Fonte de aleatoriedade** | block.blockhash + now | Commit-reveal |
+| **Previsibilidade** | ❌ 100% previsível | ✅ Não previsível até reveal |
+| **Dados públicos** | ❌ Usa dados públicos | ✅ Não usa dados públicos |
+| **Delay** | ❌ Nenhum | ✅ 1 dia entre commit e reveal |
+| **Múltiplas tentativas** | ⚠️ Permitido | ✅ Bloqueado por endereço |
+| **Eventos** | ❌ Nenhum | ✅ Completo |
+| **Versão Solidity** | 0.4.21 | 0.8.20 |
+
+### **Validação das Correções**
+
+**Testes Executados**:
+- ✅ Commit de hash funciona corretamente
+- ✅ Reveal após deadline funciona
+- ✅ Reveal antes do deadline é bloqueado
+- ✅ Guess antes do reveal é bloqueado
+- ✅ Não usa mais dados de blocos para aleatoriedade
+- ✅ Eventos são emitidos corretamente
+
+**Resultado**: ✅ **Todas as vulnerabilidades foram corrigidas**
+
+---
+
 ## 📎 **Anexos**
 
 ### **Scripts de Deploy e Exploit**

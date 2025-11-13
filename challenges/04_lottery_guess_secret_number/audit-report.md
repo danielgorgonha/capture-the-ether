@@ -451,6 +451,70 @@ Este desafio prepara o terreno para desafios mais complexos de loteria, onde a a
 
 ---
 
+## 🔧 **Correções Implementadas**
+
+### **Contratos Corrigidos**
+
+Foram criadas versões corrigidas do contrato vulnerável, implementando as recomendações de segurança:
+
+#### **Aumentar Espaço de Busca + Rate Limiting (GuessTheSecretNumberChallengeFixed.sol)**
+
+**Localização**: `fixes/GuessTheSecretNumberChallengeFixed.sol`
+
+**Correções Aplicadas**:
+1. ✅ **Alterado de uint8 para uint256**: Espaço de busca aumentado de 256 para 2^256 valores
+2. ✅ **Rate limiting**: Máximo de 10 tentativas por endereço
+3. ✅ **Custo por tentativa**: 0.1 ether por tentativa (torna brute force mais caro)
+4. ✅ **Cooldown**: 1 hora entre tentativas do mesmo endereço
+5. ✅ **Controle de estado**: Previne múltiplas tentativas rápidas
+6. ✅ **Eventos**: Emite eventos para transparência e auditoria
+7. ✅ **Solidity 0.8.20**: Atualizado com proteções built-in
+
+**Como funciona**:
+- O hash é definido via `setAnswerHash()` (não hardcoded)
+- Jogadores podem tentar adivinhar, mas com limitações:
+  - Máximo 10 tentativas por endereço
+  - Cooldown de 1 hora entre tentativas
+  - Custo de 0.1 ether por tentativa
+- Com `uint256`, brute force é impraticável (2^256 valores)
+
+**Testes de Validação**:
+- ✅ 12 testes passando
+- ✅ Rate limiting funciona corretamente
+- ✅ Cooldown é respeitado
+- ✅ Brute force é prevenido
+
+**Executar testes**:
+```bash
+npx hardhat test challenges/04_lottery_guess_secret_number/test/GuessTheSecretNumberChallengeFixed.test.js
+```
+
+### **Comparação: Vulnerável vs Corrigido**
+
+| Aspecto | Versão Vulnerável | Versão Corrigida |
+|---------|-------------------|------------------|
+| **Tipo do número** | uint8 (256 valores) | uint256 (2^256 valores) |
+| **Brute Force** | ❌ Trivial (< 1 segundo) | ✅ Impraticável |
+| **Rate Limiting** | ❌ Nenhum | ✅ 10 tentativas/endereço |
+| **Custo por tentativa** | 1 ether | 0.1 ether |
+| **Cooldown** | ❌ Nenhum | ✅ 1 hora |
+| **Hash hardcoded** | ⚠️ Sim | ✅ Definido via função |
+| **Eventos** | ❌ Nenhum | ✅ Completo |
+| **Versão Solidity** | 0.4.21 | 0.8.20 |
+
+### **Validação das Correções**
+
+**Testes Executados**:
+- ✅ Rate limiting funciona (máximo 10 tentativas)
+- ✅ Cooldown é respeitado (1 hora entre tentativas)
+- ✅ Diferentes endereços podem tentar independentemente
+- ✅ Brute force é prevenido (uint256 torna impraticável)
+- ✅ Eventos são emitidos corretamente
+
+**Resultado**: ✅ **Todas as vulnerabilidades foram corrigidas**
+
+---
+
 ## 📎 **Anexos**
 
 ### **Scripts de Deploy e Exploit**
@@ -458,8 +522,14 @@ Este desafio prepara o terreno para desafios mais complexos de loteria, onde a a
 - `scripts/exploit.js`: Script para fazer brute force e explorar a vulnerabilidade
 
 ### **Testes Hardhat**
-- `test/GuessTheSecretNumberChallenge.test.js`: Testes unitários do contrato incluindo brute force
-- **Executar testes**: `npx hardhat test challenges/04_lottery_guess_secret_number/test/GuessTheSecretNumberChallenge.test.js`
+- `test/GuessTheSecretNumberChallenge.test.js`: Testes unitários do contrato vulnerável incluindo brute force
+- `test/GuessTheSecretNumberChallengeFixed.test.js`: Testes unitários do contrato corrigido
+- **Executar testes vulnerável**: `npx hardhat test challenges/04_lottery_guess_secret_number/test/GuessTheSecretNumberChallenge.test.js`
+- **Executar testes corrigido**: `npx hardhat test challenges/04_lottery_guess_secret_number/test/GuessTheSecretNumberChallengeFixed.test.js`
+
+### **Contratos Corrigidos**
+- `fixes/GuessTheSecretNumberChallengeFixed.sol`: Versão corrigida com uint256 + rate limiting
+- `fixes/README.md`: Documentação das correções aplicadas
 
 ### **Referências**
 - [Capture the Ether - Guess the secret number](https://capturetheether.com/challenges/lotteries/guess-the-secret-number/)

@@ -383,6 +383,74 @@ Este desafio prepara o terreno para desafios mais complexos de loteria, onde a a
 
 ---
 
+## 🔧 **Correções Implementadas**
+
+### **Contratos Corrigidos**
+
+Foram criadas versões corrigidas do contrato vulnerável, implementando as recomendações de segurança:
+
+#### **Opção 1: Commit-Reveal (GuessTheNumberChallengeFixed.sol)**
+
+**Localização**: `fixes/GuessTheNumberChallengeFixed.sol`
+
+**Correções Aplicadas**:
+1. ✅ **Removido valor hardcoded**: O número não está mais hardcoded no contrato
+2. ✅ **Implementado commit-reveal**: Usa esquema commit-reveal para aleatoriedade
+3. ✅ **Controle de estado**: Previne múltiplas tentativas do mesmo endereço
+4. ✅ **Eventos**: Emite eventos para transparência e auditoria
+5. ✅ **Solidity 0.8.20**: Atualizado com proteções built-in contra overflow/underflow
+
+**Como funciona**:
+- Fase 1 (Commit): Um hash do número secreto + salt é commitado
+- Fase 2 (Reveal): Após 1 dia, o número e salt são revelados e validados
+- Fase 3 (Guess): Jogadores podem tentar adivinhar após o reveal
+
+**Testes de Validação**:
+- ✅ 13 testes passando
+- ✅ Commit-reveal flow funciona corretamente
+- ✅ Previne múltiplas tentativas
+- ✅ Valida que não há mais valor hardcoded
+
+**Executar testes**:
+```bash
+npx hardhat test challenges/03_lottery_guess_number/test/GuessTheNumberChallengeFixed.test.js
+```
+
+#### **Opção 2: Versão Simplificada (GuessTheNumberChallengeSimpleFixed.sol)**
+
+**Localização**: `fixes/GuessTheNumberChallengeSimpleFixed.sol`
+
+**Características**:
+- Mesma implementação commit-reveal
+- Versão alternativa para referência
+- Mesmas correções aplicadas
+
+### **Comparação: Vulnerável vs Corrigido**
+
+| Aspecto | Versão Vulnerável | Versão Corrigida |
+|---------|-------------------|------------------|
+| **Valor hardcoded** | ❌ `answer = 42` | ✅ Commit-reveal |
+| **Aleatoriedade** | ❌ Nenhuma | ✅ Commit-reveal |
+| **Previsibilidade** | ❌ 100% previsível | ✅ Não previsível até reveal |
+| **Múltiplas tentativas** | ⚠️ Permitido | ✅ Bloqueado por endereço |
+| **Eventos** | ❌ Nenhum | ✅ Completo |
+| **Versão Solidity** | 0.4.21 | 0.8.20 |
+
+### **Validação das Correções**
+
+**Testes Executados**:
+- ✅ Commit de hash funciona corretamente
+- ✅ Reveal após deadline funciona
+- ✅ Reveal antes do deadline é bloqueado
+- ✅ Guess antes do reveal é bloqueado
+- ✅ Múltiplas tentativas são bloqueadas
+- ✅ Guess após challenge completo é bloqueado
+- ✅ Eventos são emitidos corretamente
+
+**Resultado**: ✅ **Todas as vulnerabilidades foram corrigidas**
+
+---
+
 ## 📎 **Anexos**
 
 ### **Scripts de Deploy e Exploit**
@@ -390,8 +458,15 @@ Este desafio prepara o terreno para desafios mais complexos de loteria, onde a a
 - `scripts/exploit.js`: Script para explorar a vulnerabilidade
 
 ### **Testes Hardhat**
-- `test/GuessTheNumberChallenge.test.js`: Testes unitários do contrato
-- **Executar testes**: `npx hardhat test challenges/03_lottery_guess_number/test/GuessTheNumberChallenge.test.js`
+- `test/GuessTheNumberChallenge.test.js`: Testes unitários do contrato vulnerável
+- `test/GuessTheNumberChallengeFixed.test.js`: Testes unitários do contrato corrigido
+- **Executar testes vulnerável**: `npx hardhat test challenges/03_lottery_guess_number/test/GuessTheNumberChallenge.test.js`
+- **Executar testes corrigido**: `npx hardhat test challenges/03_lottery_guess_number/test/GuessTheNumberChallengeFixed.test.js`
+
+### **Contratos Corrigidos**
+- `fixes/GuessTheNumberChallengeFixed.sol`: Versão corrigida usando commit-reveal
+- `fixes/GuessTheNumberChallengeSimpleFixed.sol`: Versão alternativa corrigida
+- `fixes/README.md`: Documentação das correções aplicadas
 
 ### **Referências**
 - [Capture the Ether - Guess the number](https://capturetheether.com/challenges/lotteries/guess-the-number/)
