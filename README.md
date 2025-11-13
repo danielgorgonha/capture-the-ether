@@ -123,7 +123,8 @@ capture-the-ether/
 │   └── 00_warmup_deploy_contract/
 │       ├── contracts/   # Contratos Solidity
 │       ├── scripts/     # Scripts de deploy e exploit
-│       └── explanation.md
+│       ├── explanation.md  # Explicação técnica do exploit
+│       └── audit-report.md # Relatório de auditoria profissional
 ├── scripts/             # Scripts auxiliares
 ├── hardhat.config.js    # Configuração do Hardhat
 └── README.md           # Este arquivo
