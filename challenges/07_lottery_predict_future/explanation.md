@@ -75,15 +75,27 @@ npx hardhat run challenges/07_lottery_predict_future/scripts/exploit.js --networ
 ```
 
 **Estratégia do exploit:**
+
+O problema com este desafio é que precisamos fazer lock ANTES de saber qual número será gerado. No entanto, como há apenas 10 possibilidades (0-9), podemos usar uma estratégia de força bruta:
+
 1. Fazer lock com um número (0-9)
-2. Minerar blocos até podermos chamar `settle()`
+2. Minerar blocos até podermos chamar `settle()` (bloco > settlementBlockNumber)
 3. Calcular qual número será gerado no bloco atual usando:
    - Hash do bloco anterior: `block.blockhash(block.number - 1)`
    - Timestamp do bloco atual: `now`
    - Calcular: `uint8(keccak256(block.blockhash(block.number - 1), now)) % 10`
-4. Se o número calculado corresponder ao lock, chamar `settle()`
-5. Se não corresponder, chamar `settle()` para resetar e tentar novamente
+4. Se o número calculado corresponder ao lock, chamar `settle()` e receber 2 ETH
+5. Se não corresponder, chamar `settle()` para resetar o `guesser` e tentar novamente
 6. Repetir até esvaziar o contrato completamente
+
+**Por que pode levar várias tentativas?**
+
+- Estamos fazendo lock com um número aleatório (ou sequencial) e esperando que o número calculado corresponda
+- Como há apenas 10 possibilidades, estatisticamente vamos acertar em média a cada 10 tentativas
+- Mas como o número muda a cada bloco, não podemos prever exatamente qual será gerado antes de fazer lock
+- A estratégia atual funciona, mas não é a mais eficiente possível
+
+**Nota:** O exploit foi testado e funciona, mas pode levar várias tentativas até esvaziar o contrato completamente, especialmente se o saldo inicial for alto (1 ETH do deploy + múltiplas tentativas de lock).
 
 ### 3. Verificar o resultado
 
