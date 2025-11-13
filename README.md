@@ -33,7 +33,7 @@ Resolver todos os desafios do site Capture the Ether, aprendendo sobre vulnerabi
 | 6 | [Guess the random number](./challenges/05_lottery_guess_random_number/) | 300 | ✅ Completo | `05_lottery_guess_random_number` |
 | 7 | [Guess the new number](./challenges/06_lottery_guess_new_number/) | 400 | ✅ Completo | `06_lottery_guess_new_number` |
 | 8 | [Predict the future](./challenges/07_lottery_predict_future/) | 500 | ✅ Completo | `07_lottery_predict_future` |
-| 9 | Predict the block hash | 750 | ⏳ Pendente | - |
+| 9 | [Predict the block hash](./challenges/08_lottery_predict_block_hash/) | 750 | ✅ Completo | `08_lottery_predict_block_hash` |
 
 ### Math
 | # | Desafio | Pontos | Status | Pasta |
