@@ -280,6 +280,22 @@ Este desafio prepara o terreno para desafios mais complexos, onde funções púb
 
 ---
 
+## 🔧 **Correções Implementadas**
+
+### **Nota sobre Correções**
+
+Este é um **desafio warmup** (aquecimento) que não apresenta vulnerabilidades reais. O objetivo é puramente educacional: familiarizar desenvolvedores com a interação básica com contratos na blockchain.
+
+**Não há necessidade de correções** porque:
+- ✅ A função `callme()` é intencionalmente pública
+- ✅ Não há controle de acesso necessário (é o objetivo do desafio)
+- ✅ Não há vulnerabilidades de segurança
+- ✅ O objetivo é apenas verificar que a função foi chamada
+
+**Recomendação**: Este contrato pode ser usado como está, pois serve apenas como introdução à interação com contratos.
+
+---
+
 ## 📎 **Anexos**
 
 ### **Scripts de Deploy e Exploit**

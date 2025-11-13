@@ -237,6 +237,22 @@ Este desafio serve como base para os desafios mais complexos que virão, onde vu
 
 ---
 
+## 🔧 **Correções Implementadas**
+
+### **Nota sobre Correções**
+
+Este é um **desafio warmup** (aquecimento) que não apresenta vulnerabilidades reais. O objetivo é puramente educacional: familiarizar desenvolvedores com o processo de deploy de contratos na blockchain.
+
+**Não há necessidade de correções** porque:
+- ✅ O contrato não possui lógica complexa
+- ✅ Não há vulnerabilidades de segurança
+- ✅ O objetivo é apenas verificar que o deploy foi realizado com sucesso
+- ✅ Não há estado ou dados sensíveis
+
+**Recomendação**: Este contrato pode ser usado como está, pois serve apenas como introdução à plataforma Capture the Ether.
+
+---
+
 ## 📎 **Anexos**
 
 ### **Scripts de Deploy e Verificação**

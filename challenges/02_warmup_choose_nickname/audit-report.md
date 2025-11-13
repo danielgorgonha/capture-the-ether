@@ -356,6 +356,22 @@ Este desafio prepara o terreno para desafios mais complexos, onde validação in
 
 ---
 
+## 🔧 **Correções Implementadas**
+
+### **Nota sobre Correções**
+
+Este é um **desafio warmup** (aquecimento) que não apresenta vulnerabilidades reais. O objetivo é puramente educacional: familiarizar desenvolvedores com o uso de `bytes32` e mappings em Solidity.
+
+**Não há necessidade de correções** porque:
+- ✅ O contrato funciona como esperado
+- ✅ Não há vulnerabilidades de segurança
+- ✅ A validação de nickname não-nulo é suficiente para o objetivo do desafio
+- ✅ O objetivo é apenas verificar que um nickname foi definido
+
+**Recomendação**: Este contrato pode ser usado como está, pois serve apenas como introdução ao uso de tipos de dados em Solidity.
+
+---
+
 ## 📎 **Anexos**
 
 ### **Scripts de Deploy e Exploit**
