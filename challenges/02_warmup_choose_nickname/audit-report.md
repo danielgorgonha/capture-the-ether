@@ -234,27 +234,106 @@ Mappings são estruturas de dados associativas que:
 
 ---
 
+## 🔧 **Ferramentas de Análise Utilizadas**
+
+### **Análise Estática: Slither**
+
+**Quando usar**: Slither é útil para detectar vulnerabilidades conhecidas em contratos com lógica complexa, operações aritméticas, ou interações externas. Para estes contratos simples, Slither não é necessário.
+
+**Por que não usar aqui**: 
+- Contratos possuem apenas funções simples de armazenamento
+- Não há operações aritméticas, chamadas externas ou lógica complexa
+- Uso de mappings é seguro (não há storage collision)
+- Análise manual é suficiente e mais rápida
+
+**Observação**: Em contratos mais complexos (desafios 03+), Slither será utilizado para detectar vulnerabilidades automaticamente.
+
+---
+
+### **Testes com Hardhat**
+
+**Quando usar**: Testes são úteis para validar o comportamento esperado dos contratos, especialmente interação entre contratos e armazenamento de dados. Para este desafio, criamos testes básicos para verificar o deploy, a definição de nickname e a validação.
+
+**Estrutura de Testes**:
+- `test/NicknameChallenge.test.js`: Testes básicos de deploy, definição de nickname e validação
+
+**Cobertura**:
+- ✅ Deploy dos contratos
+- ✅ Estado inicial (nickname vazio)
+- ✅ Chamada da função `setNickname()` com nickname válido
+- ✅ Verificação de validação no `NicknameChallenge`
+- ✅ Teste com nickname vazio (deve falhar na validação)
+- ✅ Validação de comportamento esperado
+
+**Exemplo de Teste**:
+```javascript
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
+describe("NicknameChallenge", function () {
+  it("Should reject empty nickname", async function () {
+    const cte = await deployCaptureTheEther();
+    const challenge = await deployNicknameChallenge(player, cte);
+    
+    await cte.setNickname(ethers.ZeroHash); // bytes32(0)
+    expect(await challenge.isComplete()).to.be.false;
+  });
+
+  it("Should accept non-empty nickname", async function () {
+    const cte = await deployCaptureTheEther();
+    const challenge = await deployNicknameChallenge(player, cte);
+    
+    const nickname = ethers.encodeBytes32String("Hacker");
+    await cte.setNickname(nickname);
+    expect(await challenge.isComplete()).to.be.true;
+  });
+});
+```
+
+**Resultados**:
+- ✅ Todos os testes passam
+- ✅ Validação funciona corretamente
+
+---
+
+### **Fuzzing com Echidna**
+
+**Quando usar**: Echidna é útil para testar propriedades (invariantes) em contratos com lógica complexa ou múltiplos estados possíveis. Para estes contratos, não é necessário.
+
+**Por que não usar aqui**:
+- Contratos possuem apenas armazenamento simples (mapping)
+- Não há lógica condicional complexa ou propriedades para testar
+- Validação é simples (verificar se não está vazio)
+
+**Observação**: Em desafios futuros com lógica de loteria ou operações matemáticas, Echidna será utilizado para encontrar edge cases.
+
+---
+
 ## 📊 **Processo de Auditoria Aplicado**
 
 ### **Etapa 1: Pré-Análise**
 - ✅ Contratos identificados: `CaptureTheEther.sol` e `NicknameChallenge.sol`
 - ✅ Versão Solidity: `^0.4.21`
 - ✅ Objetivo: Verificar armazenamento e validação de dados
+- ✅ Ferramentas selecionadas: Testes Hardhat (básico), análise manual
 
 ### **Etapa 2: Análise Estática**
 - ✅ Revisão manual do código
 - ✅ Verificação de padrões de vulnerabilidade conhecidos
 - ✅ Análise de fluxo de execução
 - ✅ Verificação de tipos de dados e mappings
+- ⚠️ Slither não aplicável (contratos muito simples)
 
 ### **Etapa 3: Análise Dinâmica**
-- ✅ Deploy dos contratos em ambiente local
+- ✅ Deploy dos contratos em ambiente local (Hardhat)
 - ✅ Execução da função `setNickname()` com diferentes valores
+- ✅ Testes unitários com Hardhat
 - ✅ Verificação de validação no `NicknameChallenge`
 - ✅ Teste com nickname vazio e não vazio
 
 ### **Etapa 4: Validação**
 - ✅ Contratos funcionam conforme esperado
+- ✅ Testes passam com sucesso
 - ✅ Mappings armazenam dados corretamente
 - ✅ Validação funciona (rejeita vazio, aceita não vazio)
 - ✅ Nenhuma vulnerabilidade detectada
@@ -282,6 +361,10 @@ Este desafio prepara o terreno para desafios mais complexos, onde validação in
 ### **Scripts de Deploy e Exploit**
 - `scripts/deploy.js`: Script para fazer deploy dos contratos
 - `scripts/exploit.js`: Script para definir nickname e verificar o resultado
+
+### **Testes Hardhat**
+- `test/NicknameChallenge.test.js`: Testes unitários dos contratos
+- **Executar testes**: `npx hardhat test challenges/02_warmup_choose_nickname/test/NicknameChallenge.test.js`
 
 ### **Referências**
 - [Capture the Ether - Choose a nickname](https://capturetheether.com/challenges/warmup/nickname/)

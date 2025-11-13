@@ -125,25 +125,99 @@ Embora este contrato seja seguro, em contratos mais complexos, recomenda-se:
 
 ---
 
+## 🔧 **Ferramentas de Análise Utilizadas**
+
+### **Análise Estática: Slither**
+
+**Quando usar**: Slither é útil para detectar vulnerabilidades conhecidas em contratos com lógica complexa, operações aritméticas, ou interações externas. Para este contrato extremamente simples, Slither não é necessário.
+
+**Por que não usar aqui**: 
+- Contrato possui apenas uma função `pure` que retorna um valor constante
+- Não há operações aritméticas, chamadas externas ou manipulação de estado
+- Análise manual é suficiente e mais rápida
+
+**Observação**: Em contratos mais complexos (desafios 03+), Slither será utilizado para detectar vulnerabilidades automaticamente.
+
+---
+
+### **Testes com Hardhat**
+
+**Quando usar**: Testes são úteis para validar o comportamento esperado do contrato, mesmo em casos simples. Para este desafio, criamos testes básicos para verificar o deploy e a função `isComplete()`.
+
+**Estrutura de Testes**:
+- `test/DeployChallenge.test.js`: Testes básicos de deploy e verificação
+
+**Cobertura**:
+- ✅ Deploy do contrato
+- ✅ Verificação de `isComplete()` retorna `true`
+- ✅ Validação de comportamento esperado
+
+**Exemplo de Teste**:
+```javascript
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
+describe("DeployChallenge", function () {
+  it("Should deploy successfully", async function () {
+    const DeployChallenge = await ethers.getContractFactory("DeployChallenge");
+    const challenge = await DeployChallenge.deploy();
+    await challenge.waitForDeployment();
+    
+    expect(await challenge.getAddress()).to.be.properAddress;
+  });
+
+  it("Should return true for isComplete()", async function () {
+    const DeployChallenge = await ethers.getContractFactory("DeployChallenge");
+    const challenge = await DeployChallenge.deploy();
+    await challenge.waitForDeployment();
+    
+    expect(await challenge.isComplete()).to.be.true;
+  });
+});
+```
+
+**Resultados**:
+- ✅ Todos os testes passam
+- ✅ Contrato funciona conforme esperado
+
+---
+
+### **Fuzzing com Echidna**
+
+**Quando usar**: Echidna é útil para testar propriedades (invariantes) em contratos com lógica complexa ou múltiplos estados possíveis. Para este contrato, não é necessário.
+
+**Por que não usar aqui**:
+- Contrato não possui estado mutável
+- Não há lógica condicional ou propriedades para testar
+- Função sempre retorna o mesmo valor (`true`)
+
+**Observação**: Em desafios futuros com lógica de loteria ou operações matemáticas, Echidna será utilizado para encontrar edge cases.
+
+---
+
 ## 📊 **Processo de Auditoria Aplicado**
 
 ### **Etapa 1: Pré-Análise**
 - ✅ Contrato identificado: `DeployChallenge.sol`
 - ✅ Versão Solidity: `^0.4.21`
 - ✅ Objetivo: Verificar deploy básico
+- ✅ Ferramentas selecionadas: Testes Hardhat (básico), análise manual
 
 ### **Etapa 2: Análise Estática**
 - ✅ Revisão manual do código
 - ✅ Verificação de padrões de vulnerabilidade conhecidos
 - ✅ Análise de fluxo de execução
+- ⚠️ Slither não aplicável (contrato muito simples)
 
 ### **Etapa 3: Análise Dinâmica**
-- ✅ Deploy do contrato em ambiente local
+- ✅ Deploy do contrato em ambiente local (Hardhat)
 - ✅ Execução da função `isComplete()`
+- ✅ Testes unitários com Hardhat
 - ✅ Verificação de comportamento esperado
 
 ### **Etapa 4: Validação**
 - ✅ Contrato funciona conforme esperado
+- ✅ Testes passam com sucesso
 - ✅ Nenhuma vulnerabilidade detectada
 - ✅ Pronto para uso educacional
 
@@ -168,6 +242,10 @@ Este desafio serve como base para os desafios mais complexos que virão, onde vu
 ### **Scripts de Deploy e Verificação**
 - `scripts/deploy.js`: Script para fazer deploy do contrato
 - `scripts/exploit.js`: Script para verificar o contrato deployado
+
+### **Testes Hardhat**
+- `test/DeployChallenge.test.js`: Testes unitários do contrato
+- **Executar testes**: `npx hardhat test challenges/00_warmup_deploy_contract/test/DeployChallenge.test.js`
 
 ### **Referências**
 - [Capture the Ether - Deploy a contract](https://capturetheether.com/challenges/warmup/deploy/)

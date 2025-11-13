@@ -167,27 +167,98 @@ contract CallMeChallengeImproved {
 
 ---
 
+## 🔧 **Ferramentas de Análise Utilizadas**
+
+### **Análise Estática: Slither**
+
+**Quando usar**: Slither é útil para detectar vulnerabilidades conhecidas em contratos com lógica complexa, operações aritméticas, ou interações externas. Para este contrato simples, Slither não é necessário.
+
+**Por que não usar aqui**: 
+- Contrato possui apenas uma função que altera um booleano
+- Não há operações aritméticas, chamadas externas ou lógica complexa
+- Análise manual é suficiente e mais rápida
+
+**Observação**: Em contratos mais complexos (desafios 03+), Slither será utilizado para detectar vulnerabilidades automaticamente.
+
+---
+
+### **Testes com Hardhat**
+
+**Quando usar**: Testes são úteis para validar o comportamento esperado do contrato, especialmente mudanças de estado. Para este desafio, criamos testes básicos para verificar o deploy, a chamada da função e a mudança de estado.
+
+**Estrutura de Testes**:
+- `test/CallMeChallenge.test.js`: Testes básicos de deploy, chamada de função e mudança de estado
+
+**Cobertura**:
+- ✅ Deploy do contrato
+- ✅ Estado inicial (`isComplete = false`)
+- ✅ Chamada da função `callme()`
+- ✅ Verificação de mudança de estado (`isComplete = true`)
+- ✅ Validação de comportamento esperado
+
+**Exemplo de Teste**:
+```javascript
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
+describe("CallMeChallenge", function () {
+  it("Should start with isComplete = false", async function () {
+    const challenge = await deploy();
+    expect(await challenge.isComplete()).to.be.false;
+  });
+
+  it("Should change isComplete to true after calling callme()", async function () {
+    const challenge = await deploy();
+    await challenge.callme();
+    expect(await challenge.isComplete()).to.be.true;
+  });
+});
+```
+
+**Resultados**:
+- ✅ Todos os testes passam
+- ✅ Estado alterado corretamente após chamada
+
+---
+
+### **Fuzzing com Echidna**
+
+**Quando usar**: Echidna é útil para testar propriedades (invariantes) em contratos com lógica complexa ou múltiplos estados possíveis. Para este contrato, não é necessário.
+
+**Por que não usar aqui**:
+- Contrato possui apenas um estado mutável simples (booleano)
+- Não há lógica condicional complexa ou propriedades para testar
+- Função sempre altera o estado da mesma forma
+
+**Observação**: Em desafios futuros com lógica de loteria ou operações matemáticas, Echidna será utilizado para encontrar edge cases.
+
+---
+
 ## 📊 **Processo de Auditoria Aplicado**
 
 ### **Etapa 1: Pré-Análise**
 - ✅ Contrato identificado: `CallMeChallenge.sol`
 - ✅ Versão Solidity: `^0.4.21`
 - ✅ Objetivo: Verificar chamada de função básica
+- ✅ Ferramentas selecionadas: Testes Hardhat (básico), análise manual
 
 ### **Etapa 2: Análise Estática**
 - ✅ Revisão manual do código
 - ✅ Verificação de padrões de vulnerabilidade conhecidos
 - ✅ Análise de fluxo de execução
 - ✅ Verificação de visibilidade de funções
+- ⚠️ Slither não aplicável (contrato muito simples)
 
 ### **Etapa 3: Análise Dinâmica**
-- ✅ Deploy do contrato em ambiente local
+- ✅ Deploy do contrato em ambiente local (Hardhat)
 - ✅ Execução da função `callme()`
-- ✅ Verificação de mudança de estado (`isComplete`)
+- ✅ Testes unitários com Hardhat
+- ✅ Verificação de mudanças de estado (`isComplete`)
 - ✅ Validação de comportamento esperado
 
 ### **Etapa 4: Validação**
 - ✅ Contrato funciona conforme esperado
+- ✅ Testes passam com sucesso
 - ✅ Função pública acessível por qualquer endereço
 - ✅ Estado alterado corretamente após chamada
 - ✅ Nenhuma vulnerabilidade detectada
@@ -214,6 +285,10 @@ Este desafio prepara o terreno para desafios mais complexos, onde funções púb
 ### **Scripts de Deploy e Exploit**
 - `scripts/deploy.js`: Script para fazer deploy do contrato
 - `scripts/exploit.js`: Script para chamar a função `callme()` e verificar o resultado
+
+### **Testes Hardhat**
+- `test/CallMeChallenge.test.js`: Testes unitários do contrato
+- **Executar testes**: `npx hardhat test challenges/01_warmup_call_me/test/CallMeChallenge.test.js`
 
 ### **Referências**
 - [Capture the Ether - Call me](https://capturetheether.com/challenges/warmup/call-me/)
