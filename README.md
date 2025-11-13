@@ -78,18 +78,42 @@ Resolver todos os desafios do site Capture the Ether, aprendendo sobre vulnerabi
 # Instalar dependências
 pnpm install
 
-# Iniciar nó Hardhat local
-pnpm run node
+# Compilar contratos
+pnpm run compile
 ```
 
-### Configuração do MetaMask
+### Executando Scripts
 
-1. Importar conta do Hardhat Node (private key disponível nos logs)
-2. Adicionar rede customizada:
-   - **Nome da Rede**: `localRopsten`
+Para executar scripts de deploy e exploit, use a rede `hardhat` que está configurada com chainId 3:
+
+```bash
+# Deploy de um contrato
+npx hardhat run challenges/00_warmup_deploy_contract/scripts/deploy.js --network hardhat
+
+# Exploit de um contrato
+npx hardhat run challenges/00_warmup_deploy_contract/scripts/exploit.js --network hardhat
+```
+
+**Nota:** A rede `hardhat` é uma rede in-memory que não requer nó externo rodando. Ela usa a configuração do `hardhat.config.js` com chainId 3.
+
+### Configuração do MetaMask (Opcional)
+
+Se você quiser usar MetaMask para interagir visualmente:
+
+1. Inicie um nó Hardhat externo (em um terminal separado):
+   ```bash
+   pnpm run node
+   ```
+
+2. Importe uma conta do Hardhat Node (private key disponível nos logs do nó)
+
+3. Adicione rede customizada no MetaMask:
+   - **Nome da Rede**: `Local Hardhat`
    - **RPC URL**: `http://127.0.0.1:8545`
-   - **Chain ID**: `3`
+   - **Chain ID**: `31337` (padrão do Hardhat node) ou `3` se configurado
    - **Símbolo**: `ETH`
+
+**Importante:** O Hardhat node padrão usa chainId 31337. Para usar chainId 3 com MetaMask, você pode usar ferramentas como Anvil (Foundry) ou configurar manualmente.
 
 ## 📚 Estrutura do Projeto
 
@@ -109,9 +133,14 @@ capture-the-ether/
 
 1. Acesse a pasta do desafio em `challenges/`
 2. Leia o `explanation.md` para entender a vulnerabilidade
-3. Execute o deploy: `pnpm run deploy -- challenges/XX_desafio/scripts/deploy.js --network localRopsten`
-4. Execute o exploit: `pnpm run exploit -- challenges/XX_desafio/scripts/exploit.js --network localRopsten`
+3. Execute o deploy: `npx hardhat run challenges/XX_desafio/scripts/deploy.js --network hardhat`
+4. Execute o exploit: `npx hardhat run challenges/XX_desafio/scripts/exploit.js --network hardhat`
 5. Verifique a solução no site Capture the Ether
+
+**Exemplo para o primeiro desafio:**
+```bash
+npx hardhat run challenges/00_warmup_deploy_contract/scripts/deploy.js --network hardhat
+```
 
 ## 🤝 Contribuindo
 

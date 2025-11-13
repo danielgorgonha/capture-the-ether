@@ -25,6 +25,14 @@ module.exports = {
     ]
   },
   networks: {
+    hardhat: {
+      chainId: 3,
+      accounts: {
+        mnemonic: "test test test test test test test test test test test junk",
+        count: 20,
+        accountsBalance: "10000000000000000000000" // 10000 ETH
+      }
+    },
     localRopsten: {
       url: "http://127.0.0.1:8545",
       chainId: 3,

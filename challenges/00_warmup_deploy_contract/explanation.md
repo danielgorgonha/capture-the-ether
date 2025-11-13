@@ -28,21 +28,13 @@ Fazer o deploy do contrato na rede Ropsten (simulada localmente com chainId=3) e
 
 ## 🚀 Passo a Passo do Exploit
 
-### 1. Iniciar o nó Hardhat local
+### 1. Fazer o deploy do contrato
 
 ```bash
-pnpm run node
+npx hardhat run challenges/00_warmup_deploy_contract/scripts/deploy.js --network hardhat
 ```
 
-Isso iniciará um nó local na porta 8545 com chainId=3.
-
-### 2. Fazer o deploy do contrato
-
-Em outro terminal:
-
-```bash
-pnpm run deploy -- challenges/00_warmup_deploy_contract/scripts/deploy.js --network localRopsten
-```
+**Nota:** A rede `hardhat` é uma rede in-memory configurada com chainId 3 no `hardhat.config.js`. Não é necessário iniciar um nó externo.
 
 ### 3. Verificar o resultado
 
