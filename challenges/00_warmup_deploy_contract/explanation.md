@@ -24,7 +24,7 @@ contract DeployChallenge {
 
 ## 🎯 Objetivo
 
-Fazer o deploy do contrato na rede Ropsten (simulada localmente com chainId=3) e verificar a solução no site Capture the Ether.
+Fazer o deploy do contrato e verificar que a função `isComplete()` retorna `true`.
 
 ## 🚀 Passo a Passo do Exploit
 
@@ -43,11 +43,9 @@ O script de deploy mostrará:
 - Endereço do contrato deployado
 - Transaction hash
 
-### 4. Verificar no site Capture the Ether
+### 4. Verificar o resultado
 
-1. Conecte sua MetaMask à rede localRopsten (chainId=3)
-2. No site Capture the Ether, clique em "Check Solution"
-3. O site verificará se o contrato foi deployado corretamente
+O script de exploit mostrará se o contrato foi deployado corretamente e se `isComplete()` retorna `true`.
 
 ## 📊 Resultado Esperado
 
@@ -73,7 +71,6 @@ O script de deploy mostrará:
 ## 💡 Aprendizados
 
 - Como fazer deploy de contratos com Hardhat
-- Como configurar uma rede local simulando Ropsten
 - Como verificar contratos deployados
 - Introdução ao ecossistema de desenvolvimento Ethereum
 
