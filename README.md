@@ -38,7 +38,7 @@ Resolver todos os desafios do site Capture the Ether, aprendendo sobre vulnerabi
 ### Math
 | # | Desafio | Pontos | Status | Pasta |
 |---|---------|--------|--------|-------|
-| 10 | Token sale | 500 | ⏳ Pendente | - |
+| 10 | [Token sale](./challenges/09_math_token_sale/) | 500 | ✅ Completo | `09_math_token_sale` |
 | 11 | Token whale | 500 | ⏳ Pendente | - |
 | 12 | Retirement fund | 500 | ⏳ Pendente | - |
 | 13 | Mapping | 750 | ⏳ Pendente | - |
